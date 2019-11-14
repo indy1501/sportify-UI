@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import './App.css';
 import UserPage from './components/UserPage';
-//import { Route, Router, Redirect } from 'react-router-dom'
 import LogInPage from './components/LogInPage';
+import { Link } from 'react-router-dom';
+import SearchBusiness from './business/SearchBusiness';
 
 function App(props) {
   
@@ -25,12 +26,16 @@ function App(props) {
   return (
     <Fragment>
          {isValid && 
-         <UserPage></UserPage>
+         <SearchBusiness></SearchBusiness>
         } 
         {
           !isValid && 
           <LogInPage></LogInPage>
         }
+
+        
+
+       
 
 
     </Fragment>

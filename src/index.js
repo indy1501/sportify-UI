@@ -9,6 +9,7 @@ import { Router as BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 
 import {createBrowserHistory} from 'history';
 import LogInPage from './components/LogInPage';
+import SearchBusiness from './business/SearchBusiness';
 
 const history =  createBrowserHistory();
 /*
@@ -23,6 +24,8 @@ const routing = (
                 <Route path="/" component={App}/>
                 <Route path="/login" component={LogInPage}/>
                 <Route path="/user" component={UserPage} />
+                <Route path="/search" component={SearchBusiness}/>
+                
 
             </Switch>
         </div>

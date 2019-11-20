@@ -13,105 +13,112 @@ class AdminPageBusiness extends PureComponent {
         super(props)
 
         this.state = {
-            userData: undefined,
-            userBusinessData: [],
-            isAdmin: false,
+            userObj: undefined,
+            userBusinessData: {},
             hasBusiness: false,
             user: ""
         }
         this.getUserBusiness = this.getUserBusiness.bind(this)
+        this.onDelete = this.onDelete.bind(this)
     }
     componentDidMount() {
-        var token = sessionStorage.getItem("token");
-        var decoded = jwt.decode(token);
-        // get the decoded payload and header
-        var decoded = jwt.decode(token, { complete: true });
-        //console.log(decoded.header);
-        //console.log(decoded.payload);
-        const userObj = decoded.payload;
+        let userEmail = sessionStorage.getItem("userEmail")
+        let userObj = sessionStorage.getItem("userObj")
+        console.log(userObj)
+        console.log(userEmail)
         this.setState({
-            userData: userObj
+            userObj: userObj,
+            user: userEmail
         })
-        const isAdmin = userObj && userObj["cognito:groups"] && userObj["cognito:groups"].filter(g => g == "admin").length > 0;
-
-        this.setState({ isAdmin });
-        console.log(userObj.email)
-        setTimeout(() => {
-            /* console.log("UserEmailCheckBefore:"+this.state.userData.email)
-            console.log("isAdmin:"+this.state.isAdmin)
-            if (this.state.isAdmin){
-                this.updateTable()
-            } else {
-                this.updateTable2(this.state.userData.email);
-            } */
-            this.getUserBusiness(userObj.email)
-        }, 500);
+            this.getUserBusiness(userEmail)
 
     }
     getUserBusiness(userEmail) {
         businessService.getUserBusiness(userEmail)
             .then(json => {
                 console.log(json);
-                if (Array.isArray(json)) {
+                if (!json.error) {
                     this.setState({
                         userBusinessData: json,
                         hasBusiness: true
+                    });
+                } else {
+                    this.setState({
+                        hasBusiness: false
                     });
                 }
             })
             .catch(reason => {
                 console.log("Failed to fetch data from server, reason is : ", reason);
-                /* this.setState({
-                    hasBusiness: false
-                }) */
+            });
+    }
+    onDelete() {
+        businessService.deleteBusiness(this.state.user, this.state.userBusinessData.business_id)
+            .then(json => {
+                console.log(json);
+                this.getUserBusiness(this.state.user)
+            })
+            .catch(reason => {
+                console.log("Failed to fetch data from server, reason is : ", reason);
             });
     }
     render() {
-        const { isAdmin } = this.state;
         const { hasBusiness } = this.state;
+        const { userObj } = this.state;
+        const { userBusinessData } = this.state;
         return (
             <div>
-                <Navbar Style={{"background-color":"#1a4668"}}>
+                <Navbar bg="primary" variant="dark">
                     <Navbar.Brand>SpoRtify</Navbar.Brand>
                     <Navbar.Collapse className="justify-content-end">
                         <Navbar.Text>
-                            Signed in as: {this.state.userData &&
-                                <a href="#login">{this.state.userData.email}</a>}
-                            {/*  &nbsp;&nbsp;
-                            User Type: {
-                                isAdmin && <a> "Administrator" </a>
-                            }
-                            {
-                                !isAdmin && <a> "User (Non Admin)"</a>
-                            } */}
+                            Signed in as: {userObj &&
+                                <a href="#login">{this.state.user}</a>}
                         </Navbar.Text>
                     </Navbar.Collapse>
-                    {this.state.userData && <LogOut></LogOut>}
-                    {!this.state.userData && <LogInPage></LogInPage>}
+                    {userObj && <LogOut></LogOut>}
+                    {!userObj && <LogInPage></LogInPage>}
                 </Navbar>
-                <Container>
-                    <Row>
-                        <Col xl={{ span: 6, offset: 3 }} style={{marginTop: "30px"}}>
+
+                <Row style={{ display: "block" }}>
+                    <Col xl={{ span: 6, offset: 3 }} style={{ marginTop: "30px" }}>
+                        {
+                            !hasBusiness &&
                             <Card>
                                 <Card.Body>
-                                    {
-                                        !hasBusiness && <div>
-                                            <h5>You have not registered any business yet</h5>
-                                            <Link to="/createBusiness">Register Your Business</Link>
-                                            </div>
-                                    }
-                                   {
-                                       hasBusiness && <div>
-                                           <Card>
-                                               
-                                           </Card>
-                                       </div>
-                                   }
+
+                                    <h5>You have not registered any business yet</h5>
+                                    <Link to="/createBusiness">Register Your Business</Link>
+
+
+
                                 </Card.Body>
                             </Card>
-                        </Col>
-                    </Row>
-                </Container>
+                        }
+                        {
+                            hasBusiness && <Card >
+                                <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+                                <Card.Body>
+                                    <h2>{userBusinessData.name}</h2>
+                                    <Card.Subtitle className="mb-2 text-muted">{userBusinessData.address} {userBusinessData.city} {userBusinessData.state} {userBusinessData.postal_code}</Card.Subtitle>
+                                </Card.Body>
+
+                                <Card.Body>
+                                    <Card.Title>Categories</Card.Title>
+                                    <Card.Text>{userBusinessData.categories}</Card.Text>
+                                </Card.Body>
+                                <Card.Body>
+                                    <Button variant="outline-danger" onClick={this.onDelete}> Delete </Button>
+                                    <Button variant="outline-primary" onClick={this.onUpdate} style={{ marginLeft: "30px" }}> Update </Button>
+                                </Card.Body>
+
+                            </Card>
+                        }
+
+
+                    </Col>
+                </Row>
+
 
 
             </div>

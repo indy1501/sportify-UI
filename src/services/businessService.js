@@ -4,7 +4,8 @@ export const businessService = {
     getSearchData,
     getMoreSearchData,
     getUserBusiness,
-    createBusiness
+    createBusiness,
+    deleteBusiness
 
 }
 export const apiConfig = {
@@ -63,4 +64,15 @@ function createBusiness(userEmail,name,categories,address,city,state,postal_code
         //            console.log(res.json());
         return res.json();
     })
+}
+function deleteBusiness(userEmail, businessId) {
+    const requestOption = {
+        method: 'DELETE',
+        /* body: JSON.stringify({
+            "deleteFile": fileName,
+            "userId": id
+        }), */
+        headers: { "Content-Type": "application/json" }
+    }
+    return fetch(`${apiConfig.endpointURL}/users/${userEmail}/businesses/${businessId}`, requestOption)
 }

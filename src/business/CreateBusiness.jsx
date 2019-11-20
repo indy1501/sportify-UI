@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 import { businessService } from '../services/businessService'
+import { Link } from 'react-router-dom';
 
 class CreateBusiness extends PureComponent {
     constructor(props) {
@@ -62,8 +63,13 @@ class CreateBusiness extends PureComponent {
 
     render() {
         return (
+            <div>
+            <div style={{margin:"30px"}}>
+                <Link to="/businessAdmin"> Go Back</Link>
+            </div>
             <Card style={{ "margin": "100px" }}>
                 <Card.Body>
+
                     <Form>
                         <Form.Group controlId="name">
                             <Form.Label>Business Name</Form.Label>
@@ -137,6 +143,8 @@ class CreateBusiness extends PureComponent {
                     </Form>
                 </Card.Body>
             </Card>
+            </div>
+           
         )
     }
 }

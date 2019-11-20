@@ -4,6 +4,7 @@ import UserPage from './components/UserPage';
 import LogInPage from './components/LogInPage';
 import { Link } from 'react-router-dom';
 import SearchBusiness from './business/SearchBusiness';
+var jwt = require('jsonwebtoken');
 
 function App(props) {
   
@@ -18,7 +19,13 @@ function App(props) {
   }
 
   const sessionToken = sessionStorage.getItem("token")
-
+  var decoded = jwt.decode(sessionToken);
+  // get the decoded payload and header
+  var decoded = jwt.decode(sessionToken, { complete: true });
+  //console.log(decoded.header);
+  //console.log(decoded.payload);
+  const userObj = decoded.payload;
+  sessionStorage.setItem("userEmail", userObj.email);
   const isValid =  sessionToken != undefined &&  sessionToken.length>0 ;
 
   console.log("IsValid", isValid);
@@ -26,7 +33,7 @@ function App(props) {
   return (
     <Fragment>
          {isValid && 
-         <SearchBusiness></SearchBusiness>
+         <SearchBusiness/>
         } 
         {
           !isValid && 

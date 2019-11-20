@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import './SearchBusiness.css';
 import { businessService } from '../services/businessService';
-import RenderBusiness from './renderBusiness';
+import RenderBusiness from './RenderBusiness';
 import { Button, Row, Container, Col, Carousel } from 'react-bootstrap';
 import { AutoScaling } from 'aws-sdk';
 
@@ -13,8 +13,8 @@ class SearchBusiness extends PureComponent {
         super(props)
 
         this.state = {
-            activity: "",
-            city: "",
+            activity: "Golf",
+            city: "Las Vegas",
             last_key_business_id: "",
             last_key_city: "",
             searchData: [],
@@ -110,7 +110,7 @@ class SearchBusiness extends PureComponent {
                 <div>
                     <Container>
                         <Row style={{ margin: 20 }}>
-                            <Col xl={6} >
+                            <Col xl={{ span: 6, offset: 3 }} >
                                 <RenderBisList bisArray={this.state.searchData} flag={0}></RenderBisList>
                             </Col>
                         </Row>
@@ -118,7 +118,7 @@ class SearchBusiness extends PureComponent {
                 </div>
                 {
                     !this.state.enableCarousal &&
-                    <Button type="submit" onClick={this.loadMore}>Search</Button>
+                    <Button variant="secondary" onClick={this.loadMore} size="lg" block style={{margin:"20px", width:window.innerWidth-40}}>Load More</Button>
                 }
 
 

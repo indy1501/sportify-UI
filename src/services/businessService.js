@@ -5,10 +5,11 @@ export const businessService = {
     getMoreSearchData,
     getUserBusiness,
     createBusiness,
+    updateBusiness,
     deleteBusiness,
     getBusinessByID,
     getReviews,
-    getMoreReviews
+    getMoreReviews,
 
 }
 export const apiConfig = {
@@ -69,6 +70,24 @@ function createBusiness(userEmail,name,categories,address,city,state,postal_code
         return res.json();
     })
 }
+function updateBusiness(businessId,name,categories,address,city,state,postal_code) {
+    const requestOption = {
+        method: 'PUT',
+        body: JSON.stringify({
+            "name": name,
+            "categories": categories,
+            "address": address,
+            "city": city,
+            "state": state,
+            "postal_code": postal_code
+        }),
+        headers: { "Content-Type": "application/json" }
+    }
+    return fetch(`${apiConfig.endpointURL}/businesses/${businessId}`, requestOption).then(res => {
+        console.log(res.json());
+        return res.json();
+    })
+}
 function deleteBusiness(userEmail, businessId) {
     const requestOption = {
         method: 'DELETE',
@@ -101,13 +120,13 @@ function getReviews(businessId) {
     })
 }
 
-function getMoreReviews(business_type, city, last_key_business_id, last_key_city) {
+function getMoreReviews(businessId, last_key_review_id, last_key_business_id) {
     //console.log("business_type = "+business_type, "city = "+city);
     const requestOption = {
         method: 'GET',
         headers: { "Content-Type": "application/json" }
     }
-    return fetch(`${apiConfig.endpointURL2}/businesses?event_type=${business_type}&city=${city}&last_key_business_id=${last_key_business_id}&last_key_city=${last_key_city}`, requestOption).then(res => {
+    return fetch(`${apiConfig.endpointURL2}/businesses/${businessId}/reviews?last_key_business_id=${last_key_business_id}&last_key_business_id=${last_key_business_id}&last_key_review_id=${last_key_review_id}`, requestOption).then(res => {
         //console.log(res); 
         return res.json();
     })

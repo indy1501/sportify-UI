@@ -13,6 +13,7 @@ import SearchBusiness from './business/SearchBusiness';
 import BusinessDetails from './business/BusinessDetails';
 import AdminPageBusiness from './business/AdminPageBusiness';
 import CreateBusiness from './business/CreateBusiness';
+import UpdateBusiness from './business/UpdateBusiness';
 
 const history =  createBrowserHistory();
 /*
@@ -30,6 +31,7 @@ const routing = (
                 <Route path="/businessDetails/:id" component={BusinessDetails}/> 
                 <Route path="/businessAdmin" component={AdminPageBusiness}/> 
                 <Route path="/createBusiness" component={CreateBusiness}/>
+                <Route path="/updateBusiness" component={UpdateBusiness}/>
             </Switch>
     </BrowserRouter>
 )

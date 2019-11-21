@@ -13,8 +13,11 @@ class BusinessDetails extends PureComponent {
         this.state = {
             businessData: {},
             reviews: [],
+            last_key_review_id: "",
+            last_key_business_id: "",
             businessId: props.match.params.id
         }
+        this.loadMore = this.loadMore.bind(this)
     }
     componentDidMount() {
         businessService.getBusinessByID(this.state.businessId)
@@ -36,6 +39,8 @@ class BusinessDetails extends PureComponent {
                 if (Array.isArray(json.reviews)) {
                     this.setState({
                         reviews: json.reviews,
+                        last_key_business_id: json.LastEvaluatedKey.business_id,
+                        last_key_review_id: json.LastEvaluatedKey.review_id
                     });
                 }
             })
@@ -43,6 +48,24 @@ class BusinessDetails extends PureComponent {
                 console.log("Failed to fetch data from server, reason is : ", reason);
             });
     }
+
+    loadMore() {
+        businessService.getMoreReviews(this.state.businessId, this.state.last_key_review_id, this.state.last_key_business_id)
+            .then(json => {
+                console.log(json);
+                if (Array.isArray(json.businesses)) {
+                    this.setState({
+                        reviews: this.state.reviews.concat(json.reviews),
+                        last_key_business_id: json.LastEvaluatedKey.business_id,
+                        last_key_city: json.LastEvaluatedKey.city
+                    });
+                }
+            })
+            .catch(reason => {
+                console.log("Failed to fetch data from server, reason is : ", reason);
+            });
+    }
+
 
     render() {
         const { businessData } = this.state
@@ -95,7 +118,7 @@ class BusinessDetails extends PureComponent {
                                     })
                                 }
                                 <Card.Body>
-                                <Card.Link href="#" >Load More...</Card.Link>
+                                <Card.Link href="#" onClick={this.loadMore} >Load More...</Card.Link>
                                 </Card.Body>
                                
                             </Card.Body>

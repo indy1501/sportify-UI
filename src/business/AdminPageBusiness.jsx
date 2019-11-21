@@ -66,6 +66,7 @@ class AdminPageBusiness extends PureComponent {
         const { hasBusiness } = this.state;
         const { userObj } = this.state;
         const { userBusinessData } = this.state;
+        const businessUpdateURL = `/updateBusiness/${this.state.userBusinessData.business_id}`
         return (
             <div>
                 <Navbar bg="primary" variant="dark">
@@ -109,7 +110,7 @@ class AdminPageBusiness extends PureComponent {
                                 </Card.Body>
                                 <Card.Body>
                                     <Button variant="outline-danger" onClick={this.onDelete}> Delete </Button>
-                                    <Button variant="outline-primary" onClick={this.onUpdate} style={{ marginLeft: "30px" }}> Update </Button>
+                                     <Link to={businessUpdateURL}><Button variant="outline-primary" style={{ marginLeft: "30px" }}>Update </Button></Link>
                                 </Card.Body>
 
                             </Card>

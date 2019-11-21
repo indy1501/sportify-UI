@@ -22,7 +22,7 @@
     height: calc(3rem + 2px) !important;
     border-radius:0;
   }
-  @media (min-width: 1920px){
+  @media (min-width: 2200px){
     .search-sec{
         position: relative;
         top: -114px;
@@ -32,7 +32,7 @@
   
   @media (max-width: 9992px){
     .search-sec{
-        background: #1A4668;
+        background: white;
     }
   }
   

@@ -5,11 +5,15 @@ export const businessService = {
     getMoreSearchData,
     getUserBusiness,
     createBusiness,
-    deleteBusiness
+    deleteBusiness,
+    getBusinessByID,
+    getReviews,
+    getMoreReviews
 
 }
 export const apiConfig = {
-    endpointURL: "http://localhost:3001"
+    endpointURL: "http://localhost:3001",
+    endpointURL2: "http://localhost:3002"
 }
 
 function getSearchData(business_type, city) {
@@ -75,4 +79,36 @@ function deleteBusiness(userEmail, businessId) {
         headers: { "Content-Type": "application/json" }
     }
     return fetch(`${apiConfig.endpointURL}/users/${userEmail}/businesses/${businessId}`, requestOption)
+}
+function getBusinessByID(businessId) {
+    const requestOption = {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" }
+    }
+    return fetch(`${apiConfig.endpointURL}/businesses/${businessId}`, requestOption).then(res => {
+        //console.log(res); 
+        return res.json();
+    })
+}
+function getReviews(businessId) {
+    const requestOption = {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" }
+    }
+    return fetch(`${apiConfig.endpointURL2}/businesses/${businessId}/reviews`, requestOption).then(res => {
+        // console.log(res); 
+        return res.json();
+    })
+}
+
+function getMoreReviews(business_type, city, last_key_business_id, last_key_city) {
+    //console.log("business_type = "+business_type, "city = "+city);
+    const requestOption = {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" }
+    }
+    return fetch(`${apiConfig.endpointURL2}/businesses?event_type=${business_type}&city=${city}&last_key_business_id=${last_key_business_id}&last_key_city=${last_key_city}`, requestOption).then(res => {
+        //console.log(res); 
+        return res.json();
+    })
 }

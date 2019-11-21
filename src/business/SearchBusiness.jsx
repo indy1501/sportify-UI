@@ -108,13 +108,11 @@ class SearchBusiness extends PureComponent {
                     </div>
                 </section>
                 <div>
-                    <Container>
                         <Row style={{ margin: 20 }}>
                             <Col xl={{ span: 6, offset: 3 }} >
                                 <RenderBisList bisArray={this.state.searchData} flag={0}></RenderBisList>
                             </Col>
                         </Row>
-                    </Container >
                 </div>
                 {
                     !this.state.enableCarousal &&

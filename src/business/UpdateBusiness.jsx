@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 import { businessService } from '../services/businessService'
 import { Link } from 'react-router-dom';
+import NavBar from './NavBar';
 
 class UpdateBusiness extends PureComponent {
     constructor(props) {
@@ -17,7 +18,7 @@ class UpdateBusiness extends PureComponent {
             postalCode: "",
             cats: ["Active Life"],
             finalSelected: [],
-            businessId: "7b4b1ad7-b374-407a-87a7-e83600166ca0"
+            businessId: props.match.params.id
         }
         this.onSubmit = this.onSubmit.bind(this)
         this.updateName = this.updateName.bind(this)
@@ -83,7 +84,9 @@ class UpdateBusiness extends PureComponent {
 
     render() {
         return (
+            
             <div>
+                <NavBar></NavBar>
                 <div style={{ margin: "30px" }}>
                     <Link to="/businessAdmin"> Go Back</Link>
                 </div>

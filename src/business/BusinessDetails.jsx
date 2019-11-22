@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
-import { Card, Button, Col, Row } from 'react-bootstrap'
+import { Card, Button, Col, Row, Modal } from 'react-bootstrap'
 import { businessService } from '../services/businessService';
 import { IoMdPerson } from "react-icons/io";
 import { TiTick } from "react-icons/ti";
+import NavBar from './NavBar';
 
 class BusinessDetails extends PureComponent {
     constructor(props) {
@@ -15,10 +16,25 @@ class BusinessDetails extends PureComponent {
             reviews: [],
             last_key_review_id: "",
             last_key_business_id: "",
-            businessId: props.match.params.id
+            businessId: props.match.params.id,
+            modalShow: false
         }
         this.loadMore = this.loadMore.bind(this)
+        this.setModalShow  = this.setModalShow.bind(this)
+        this.postReview = this.postReview.bind(this)
+        
     }
+
+    setModalShow(value) {
+        this.setState({
+            modalShow: value
+        })
+    }
+    postReview(review) { 
+        // ser
+        console.log(review);
+    }
+
     componentDidMount() {
         businessService.getBusinessByID(this.state.businessId)
             .then(json => {
@@ -78,6 +94,7 @@ class BusinessDetails extends PureComponent {
 
         return (
             <div>
+                <NavBar></NavBar>
                 <Row>
                     <Col xl={{ span: 6, offset: 3 }}>
                         <Card style={{ margin: 30 }}>
@@ -104,21 +121,26 @@ class BusinessDetails extends PureComponent {
 
                             </Card.Body>
                             <Card.Body>
+                                <Card.Link href="#" onClick={(e) => this.setModalShow(true)} >Write a Review</Card.Link>
+                                <PostReviewModal 
+                                        show={this.state.modalShow} 
+                                        onHide={(e) => this.setModalShow(false)}
+                                        onPostReview={this.postReview}></PostReviewModal>
+                            </Card.Body>
+                            <Card.Body>
                                 <Card.Title>Recommended Reviews :</Card.Title>
                                 {
                                     reviews && reviews.map(value => {
-                                        return (<Card border="primary" key={value.business_id}>
-                                            <Card.Header><IoMdPerson/> &nbsp; {value.username}</Card.Header>
-                                            <Card.Body>
-                                                <Card.Text>
-                                                    {value.text}
-                                                </Card.Text>
-                                            </Card.Body>
-                                        </Card>)
+                                        return (
+                                            <Review bisReview={value}></Review>
+                                        )
                                     })
                                 }
                                 <Card.Body>
-                                <Card.Link href="#" onClick={this.loadMore} >Load More...</Card.Link>
+                                    {
+                                        reviews &&  <Card.Link href="#" onClick={this.loadMore} >Load More...</Card.Link>
+                                    }
+                               
                                 </Card.Body>
                                
                             </Card.Body>
@@ -130,4 +152,43 @@ class BusinessDetails extends PureComponent {
     }
 }
 
-export default BusinessDetails
+export default BusinessDetails; 
+
+
+export const Review = ({bisReview}) => {
+    const review = bisReview;
+    return (
+        <Card border="primary" key={review.business_id}>
+        <Card.Header><IoMdPerson/> &nbsp; {review.username}</Card.Header>
+        <Card.Body>
+            <Card.Text>
+                {review.text}
+            </Card.Text>
+        </Card.Body>
+    </Card>
+    );
+}
+
+export const PostReviewModal = ({onPostReview, ...props}) => {
+    const [reviewText, setReviewText] = React.useState("Write A review");
+    return (
+        <Modal
+          {...props}
+          size="lg"
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+             Post Review
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <textarea style={{width:"100%", height:"300px", padding: 20}} value={reviewText} onChange={e=> setReviewText(e.target.value)}> </textarea>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="outline-success" onClick={e=> onPostReview(reviewText)}>Post</Button>
+          </Modal.Footer>
+        </Modal>
+      );
+}

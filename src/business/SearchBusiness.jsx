@@ -4,6 +4,7 @@ import { businessService } from '../services/businessService';
 import RenderBusiness from './RenderBusiness';
 import { Button, Row, Container, Col, Carousel } from 'react-bootstrap';
 import { AutoScaling } from 'aws-sdk';
+import NavBar from './NavBar';
 
 const astyle = {
     'text-align': 'center'
@@ -77,6 +78,7 @@ class SearchBusiness extends PureComponent {
     render() {
         return (
             <div>
+                <NavBar></NavBar>
                 {
                     this.state.enableCarousal &&
                     <Carousal></Carousal>

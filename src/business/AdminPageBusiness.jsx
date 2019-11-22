@@ -5,7 +5,9 @@ import LogOut from '../components/LogOut';
 import { Form } from 'react-bootstrap';
 import { businessService } from '../services/businessService';
 import { Link } from 'react-router-dom';
+import { TiTick } from "react-icons/ti";
 import CreateBusiness from './CreateBusiness';
+import NavBar from './NavBar';
 var jwt = require('jsonwebtoken');
 
 class AdminPageBusiness extends PureComponent {
@@ -13,7 +15,6 @@ class AdminPageBusiness extends PureComponent {
         super(props)
 
         this.state = {
-            userObj: undefined,
             userBusinessData: {},
             hasBusiness: false,
             user: ""
@@ -23,14 +24,11 @@ class AdminPageBusiness extends PureComponent {
     }
     componentDidMount() {
         let userEmail = sessionStorage.getItem("userEmail")
-        let userObj = sessionStorage.getItem("userObj")
-        console.log(userObj)
         console.log(userEmail)
         this.setState({
-            userObj: userObj,
             user: userEmail
         })
-            this.getUserBusiness(userEmail)
+        this.getUserBusiness(userEmail)
 
     }
     getUserBusiness(userEmail) {
@@ -64,22 +62,11 @@ class AdminPageBusiness extends PureComponent {
     }
     render() {
         const { hasBusiness } = this.state;
-        const { userObj } = this.state;
         const { userBusinessData } = this.state;
         const businessUpdateURL = `/updateBusiness/${this.state.userBusinessData.business_id}`
         return (
             <div>
-                <Navbar bg="primary" variant="dark">
-                    <Navbar.Brand>SpoRtify</Navbar.Brand>
-                    <Navbar.Collapse className="justify-content-end">
-                        <Navbar.Text>
-                            Signed in as: {userObj &&
-                                <a href="#login">{this.state.user}</a>}
-                        </Navbar.Text>
-                    </Navbar.Collapse>
-                    {userObj && <LogOut></LogOut>}
-                    {!userObj && <LogInPage></LogInPage>}
-                </Navbar>
+                <NavBar></NavBar>
 
                 <Row style={{ display: "block" }}>
                     <Col xl={{ span: 6, offset: 3 }} style={{ marginTop: "30px" }}>
@@ -105,12 +92,18 @@ class AdminPageBusiness extends PureComponent {
                                 </Card.Body>
 
                                 <Card.Body>
-                                    <Card.Title>Categories</Card.Title>
+                                    <Card.Title>Categories : </Card.Title>
                                     <Card.Text>{userBusinessData.categories}</Card.Text>
+                                     {
+
+                                        /* userBusinessData.categories && userBusinessData.categories.map(value => {
+                                            return (<Card.Text key={value}>&nbsp; {value} &nbsp;  <TiTick style={{ fontStyle: "Bold", color: "green" }} /> </Card.Text>)
+                                        }) */
+                                    }
                                 </Card.Body>
                                 <Card.Body>
                                     <Button variant="outline-danger" onClick={this.onDelete}> Delete </Button>
-                                     <Link to={businessUpdateURL}><Button variant="outline-primary" style={{ marginLeft: "30px" }}>Update </Button></Link>
+                                    <Link to={businessUpdateURL}><Button variant="outline-primary" style={{ marginLeft: "30px" }}>Update </Button></Link>
                                 </Card.Body>
 
                             </Card>

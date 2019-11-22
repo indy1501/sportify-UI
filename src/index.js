@@ -31,7 +31,7 @@ const routing = (
                 <Route path="/businessDetails/:id" component={BusinessDetails}/> 
                 <Route path="/businessAdmin" component={AdminPageBusiness}/> 
                 <Route path="/createBusiness" component={CreateBusiness}/>
-                <Route path="/updateBusiness" component={UpdateBusiness}/>
+                <Route path="/updateBusiness/:id" component={UpdateBusiness}/>
             </Switch>
     </BrowserRouter>
 )

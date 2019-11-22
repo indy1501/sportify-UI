@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Card, Form, Button } from 'react-bootstrap'
 import { businessService } from '../services/businessService'
 import { Link } from 'react-router-dom';
+import NavBar from './NavBar';
 
 class CreateBusiness extends PureComponent {
     constructor(props) {
@@ -64,87 +65,88 @@ class CreateBusiness extends PureComponent {
     render() {
         return (
             <div>
-            <div style={{margin:"30px"}}>
-                <Link to="/businessAdmin"> Go Back</Link>
-            </div>
-            <Card style={{ "margin": "100px" }}>
-                <Card.Body>
+                <NavBar></NavBar>
+                <div style={{ margin: "30px" }}>
+                    <Link to="/businessAdmin"> Go Back</Link>
+                </div>
+                <Card style={{ "margin": "100px" }}>
+                    <Card.Body>
 
-                    <Form>
-                        <Form.Group controlId="name">
-                            <Form.Label>Business Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Name of Business" value={this.state.name} onChange={this.updateName} />
-                            <Form.Control.Feedback type="invalid">
-                                Please provide a valid name.
+                        <Form>
+                            <Form.Group controlId="name">
+                                <Form.Label>Business Name</Form.Label>
+                                <Form.Control type="text" placeholder="Enter Name of Business" value={this.state.name} onChange={this.updateName} />
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a valid name.
                             </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group controlId="exampleForm.ControlSelect2">
-                            <Form.Label>Categories</Form.Label>
-                            <Form.Control as="select" multiple onChange={e => {
-                                console.log(e.target.options);
-                                const opts = e.target.options;
-                                let tempArray = [];
-                                for (var i = 0; i < opts.length; i++) {
-                                    var item = opts.item(i);
-                                    console.log(item.selected, item.value);
-                                    if (item.selected == true) {
-                                        tempArray.push(item.value)
+                            </Form.Group>
+                            <Form.Group controlId="exampleForm.ControlSelect2">
+                                <Form.Label>Categories</Form.Label>
+                                <Form.Control as="select" multiple onChange={e => {
+                                    console.log(e.target.options);
+                                    const opts = e.target.options;
+                                    let tempArray = [];
+                                    for (var i = 0; i < opts.length; i++) {
+                                        var item = opts.item(i);
+                                        console.log(item.selected, item.value);
+                                        if (item.selected == true) {
+                                            tempArray.push(item.value)
+                                        }
                                     }
-                                }
-                                this.setState({
-                                    finalSelected: tempArray
-                                })
-                            }}>
-                                <option>Active Life</option>
-                                <option>Hiking</option>
-                                <option>Golf</option>
-                                <option>Fitness & Instruction</option>
-                                <option>Cycling Classes</option>
-                                <option>Yoga</option>
-                                <option>Sporting Goods</option>
-                                <option>Boot Camps</option>
-                                <option>Cardio Classes</option>
-                                <option>Boxing</option>
-                                <option>Gymnastics</option>
-                                <option>Martial Arts</option>
-                            </Form.Control>
-                        </Form.Group>
-                        <Form.Group controlId="address">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Address" value={this.state.address} onChange={this.updateAddress} />
-                            <Form.Control.Feedback type="invalid">
-                                Please provide a valid address.
+                                    this.setState({
+                                        finalSelected: tempArray
+                                    })
+                                }}>
+                                    <option>Active Life</option>
+                                    <option>Hiking</option>
+                                    <option>Golf</option>
+                                    <option>Fitness & Instruction</option>
+                                    <option>Cycling Classes</option>
+                                    <option>Yoga</option>
+                                    <option>Sporting Goods</option>
+                                    <option>Boot Camps</option>
+                                    <option>Cardio Classes</option>
+                                    <option>Boxing</option>
+                                    <option>Gymnastics</option>
+                                    <option>Martial Arts</option>
+                                </Form.Control>
+                            </Form.Group>
+                            <Form.Group controlId="address">
+                                <Form.Label>Address</Form.Label>
+                                <Form.Control type="text" placeholder="Enter Address" value={this.state.address} onChange={this.updateAddress} />
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a valid address.
                             </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group controlId="state">
-                            <Form.Label>State</Form.Label>
-                            <Form.Control type="text" placeholder="Enter State" value={this.state.state} onChange={this.updateState} />
-                            <Form.Control.Feedback type="invalid">
-                                Please provide a valid state.
+                            </Form.Group>
+                            <Form.Group controlId="state">
+                                <Form.Label>State</Form.Label>
+                                <Form.Control type="text" placeholder="Enter State" value={this.state.state} onChange={this.updateState} />
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a valid state.
                             </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group controlId="city">
-                            <Form.Label>City</Form.Label>
-                            <Form.Control type="text" placeholder="Enter City" value={this.state.city} onChange={this.updateCity} />
-                            <Form.Control.Feedback type="invalid">
-                                Please provide a valid city.
+                            </Form.Group>
+                            <Form.Group controlId="city">
+                                <Form.Label>City</Form.Label>
+                                <Form.Control type="text" placeholder="Enter City" value={this.state.city} onChange={this.updateCity} />
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a valid city.
                             </Form.Control.Feedback>
-                        </Form.Group>
-                        <Form.Group controlId="postalCode">
-                            <Form.Label>Postal Code</Form.Label>
-                            <Form.Control type="text" placeholder="Enter Postal Code" value={this.state.postalCode} onChange={this.updatePostal} />
-                            <Form.Control.Feedback type="invalid">
-                                Please provide a valid postal code.
+                            </Form.Group>
+                            <Form.Group controlId="postalCode">
+                                <Form.Label>Postal Code</Form.Label>
+                                <Form.Control type="text" placeholder="Enter Postal Code" value={this.state.postalCode} onChange={this.updatePostal} />
+                                <Form.Control.Feedback type="invalid">
+                                    Please provide a valid postal code.
                             </Form.Control.Feedback>
-                        </Form.Group>
-                        <Button variant="primary" type="submit" onClick={this.onSubmit}>
-                            Submit
+                            </Form.Group>
+                            <Button variant="primary" type="submit" onClick={this.onSubmit}>
+                                Submit
                         </Button>
-                    </Form>
-                </Card.Body>
-            </Card>
+                        </Form>
+                    </Card.Body>
+                </Card>
             </div>
-           
+
         )
     }
 }

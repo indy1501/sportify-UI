@@ -10,7 +10,7 @@ export const businessService = {
     getBusinessByID,
     getReviews,
     getMoreReviews,
-
+    PostReview
 }
 export const apiConfig = {
     endpointURL: "http://localhost:3001",
@@ -52,7 +52,7 @@ function getUserBusiness(userEmail) {
         return res.json();
     })
 }
-function createBusiness(userEmail,name,categories,address,city,state,postal_code) {
+function createBusiness(userEmail, name, categories, address, city, state, postal_code) {
     const requestOption = {
         method: 'POST',
         body: JSON.stringify({
@@ -70,7 +70,7 @@ function createBusiness(userEmail,name,categories,address,city,state,postal_code
         return res.json();
     })
 }
-function updateBusiness(businessId,name,categories,address,city,state,postal_code) {
+function updateBusiness(businessId, name, categories, address, city, state, postal_code) {
     const requestOption = {
         method: 'PUT',
         body: JSON.stringify({
@@ -128,6 +128,25 @@ function getMoreReviews(businessId, last_key_review_id, last_key_business_id) {
     }
     return fetch(`${apiConfig.endpointURL2}/businesses/${businessId}/reviews?last_key_business_id=${last_key_business_id}&last_key_business_id=${last_key_business_id}&last_key_review_id=${last_key_review_id}`, requestOption).then(res => {
         //console.log(res); 
+        return res.json();
+    })
+}
+function PostReview(businessId,review,userEmail,userName ) {
+    const requestOption = {
+        method: 'POST',
+        body: JSON.stringify({
+            "cool": "",
+            "funny": "",
+            "stars": "5",
+            "text": review,
+            "useful": "",
+            "user_id": userEmail,
+            "username": userName
+        }),
+        headers: { "Content-Type": "application/json" }
+    }
+    return fetch(`${apiConfig.endpointURL2}/businesses/${businessId}/reviews`, requestOption).then(res => {
+        //            console.log(res.json());
         return res.json();
     })
 }

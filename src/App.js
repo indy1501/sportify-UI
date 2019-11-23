@@ -1,7 +1,10 @@
 import React, { Fragment } from 'react';
+import { Route } from 'react-router-dom';
 import './App.css';
 import UserPage from './components/UserPage';
 import LogInPage from './components/LogInPage';
+import Home from './components/Home';
+import Login from './components/auth/Login';
 import { Link } from 'react-router-dom';
 import SearchBusiness from './business/SearchBusiness';
 import AdminPageBusiness from './business/AdminPageBusiness';
@@ -57,9 +60,6 @@ function App(props) {
         !isValid &&
         <LogInPage></LogInPage>
       }
-
-
-
 
 
 

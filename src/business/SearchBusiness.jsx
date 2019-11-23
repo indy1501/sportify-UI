@@ -138,7 +138,7 @@ const Carousal = (props) => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height={window.innerHeight - 160} 
+                    height={window.innerHeight - 450} 
                     src="https://iptvmasala.com/wp-content/uploads/2019/04/Sports-IPTV-m3u-playlist.jpg"
                     alt="First slide"
                 />
@@ -150,7 +150,7 @@ const Carousal = (props) => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height={window.innerHeight - 160} 
+                    height={window.innerHeight - 450} 
                     src="https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/gettyimages-649666110-1563321202.jpg?crop=1.00xw:0.892xh;0,0.0668xh&resize=900:*"
                     alt="Third slide"
                 />
@@ -163,7 +163,7 @@ const Carousal = (props) => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height={window.innerHeight - 160} 
+                    height={window.innerHeight - 450} 
                     src="https://usercontent2.hubstatic.com/14476037_f520.jpg"
                     alt="Third slide"
                 />

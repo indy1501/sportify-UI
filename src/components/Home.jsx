@@ -8,6 +8,8 @@ export default withAuth(
 
     checkAuthentication = async () => {
       const authenticated = await this.props.auth.isAuthenticated();
+      const accessToken = await this.props.auth.getAccessToken();
+      console.log(accessToken);
       if (authenticated !== this.state.authenticated) {
         this.setState({ authenticated });
       }

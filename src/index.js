@@ -25,9 +25,9 @@ const history =  createBrowserHistory();
         <Route path="/contact" component={Contact} />
 
 */
-function onAuthRequired({ history }) {
-  history.push('/login');
-}
+// function onAuthRequired({ history }) {
+//   history.push('/login');
+// }
 
 const routing = (
     <BrowserRouter history={history}>
@@ -35,19 +35,19 @@ const routing = (
               issuer="https://dev-810207.okta.com/oauth2/default"
               client_id="0oa1x4j4t9mmLgVD1357"
               redirect_uri={window.location.origin + '/implicit/callback'}
-              onAuthRequired={onAuthRequired}
+              //onAuthRequired={onAuthRequired}
             >
             <Switch>
                 <Route path="/" exact component={App}/>
                 <Route path="/home" exact component={Home}/>
-                <Route path="/loginold" component={LogInPage}/>
+                <Route path="/login" component={LogInPage}/>
                 <Route path="/user" component={UserPage} />
                 <Route path="/search" component={SearchBusiness}/> 
                 <Route path="/businessDetails/:id" component={BusinessDetails}/> 
                 <Route path="/businessAdmin" component={AdminPageBusiness}/> 
                 <Route path="/createBusiness" component={CreateBusiness}/>
                 <Route path="/updateBusiness/:id" component={UpdateBusiness}/>
-                <Route path="/login" render={() => ( <Login baseUrl="https://dev-810207.okta.com" /> )}/>
+                <Route path="/loginokta" render={() => ( <Login baseUrl="https://dev-810207.okta.com" /> )}/>
                 <Route path="/implicit/callback" component={ImplicitCallback} />
             </Switch>
             </Security>

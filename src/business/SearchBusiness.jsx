@@ -5,6 +5,7 @@ import RenderBusiness from './RenderBusiness';
 import { Button, Row, Container, Col, Carousel } from 'react-bootstrap';
 import { AutoScaling } from 'aws-sdk';
 import NavBar from './NavBar';
+import BusinessDetails from './BusinessDetails';
 
 const astyle = {
     'text-align': 'center'
@@ -19,12 +20,15 @@ class SearchBusiness extends PureComponent {
             last_key_business_id: "",
             last_key_city: "",
             searchData: [],
-            enableCarousal: true
+            enableCarousal: true,
+            curBusiness: undefined
         }
         this.updateCity = this.updateCity.bind(this)
         this.updateActivity = this.updateActivity.bind(this)
         this.onSearch = this.onSearch.bind(this)
         this.loadMore = this.loadMore.bind(this)
+        this.renderBusiness = this.renderBusiness.bind(this);
+        this.closeBusiness = this.closeBusiness.bind(this)
     }
 
     updateCity(event) {
@@ -74,6 +78,18 @@ class SearchBusiness extends PureComponent {
             });
     }
 
+    renderBusiness(bis) {
+        this.setState({
+            curBusiness: bis
+        })
+    }
+
+    closeBusiness() {
+        this.setState({
+            curBusiness: undefined
+        })
+    }
+
 
     render() {
         return (
@@ -87,8 +103,8 @@ class SearchBusiness extends PureComponent {
                 <section className="search-sec">
                     <div className="container">
                         {
-                             !this.state.enableCarousal &&
-                             <h1 style={{color:"white", margin: "auto", marginBottom: "10px"}}>SpoRtify</h1>
+                            !this.state.enableCarousal &&
+                            <h1 style={{ color: "white", margin: "auto", marginBottom: "10px" }}>SpoRtify</h1>
                         }
                         <form action="#" method="post" noValidate="novalidate">
                             <div className="row">
@@ -110,15 +126,22 @@ class SearchBusiness extends PureComponent {
                     </div>
                 </section>
                 <div>
+                    {
+                        this.state.curBusiness && 
+                        <BusinessDetails key={"details-"+this.state.curBusiness.business_id} business={this.state.curBusiness} closeBusiness={this.closeBusiness}> </BusinessDetails>
+                    }
+                    {
+                        !this.state.curBusiness && 
                         <Row style={{ margin: 20 }}>
                             <Col xl={{ span: 6, offset: 3 }} >
-                                <RenderBisList bisArray={this.state.searchData} flag={0}></RenderBisList>
+                                <RenderBisList bisArray={this.state.searchData} flag={0} renderDetails={this.renderBusiness}></RenderBisList>
                             </Col>
                         </Row>
+                    }
                 </div>
                 {
-                    !this.state.enableCarousal &&
-                    <Button variant="secondary" onClick={this.loadMore} size="lg" block style={{margin:"20px", width:window.innerWidth-40}}>Load More</Button>
+                    !this.state.enableCarousal && !this.state.curBusiness &&
+                    <Button variant="secondary" onClick={this.loadMore} size="lg" block style={{ margin: "20px", width: window.innerWidth - 40 }}>Load More</Button>
                 }
 
 
@@ -132,13 +155,13 @@ export default SearchBusiness
 
 const Carousal = (props) => {
     return (
-        
+
 
         <Carousel>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height={window.innerHeight - 450} 
+                    height={window.innerHeight - 450}
                     src="https://iptvmasala.com/wp-content/uploads/2019/04/Sports-IPTV-m3u-playlist.jpg"
                     alt="First slide"
                 />
@@ -150,7 +173,7 @@ const Carousal = (props) => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height={window.innerHeight - 450} 
+                    height={window.innerHeight - 450}
                     src="https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/gettyimages-649666110-1563321202.jpg?crop=1.00xw:0.892xh;0,0.0668xh&resize=900:*"
                     alt="Third slide"
                 />
@@ -163,7 +186,7 @@ const Carousal = (props) => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height={window.innerHeight - 450} 
+                    height={window.innerHeight - 450}
                     src="https://usercontent2.hubstatic.com/14476037_f520.jpg"
                     alt="Third slide"
                 />
@@ -177,14 +200,13 @@ const Carousal = (props) => {
     );
 }
 
-const RenderBisList = ({ bisArray, flag }) => {
+const RenderBisList = ({ bisArray, flag, renderDetails }) => {
 
     return (
         bisArray.map(
             bis => {
                 return (
-
-                    <RenderBusiness bis={bis} key={bis.business_id}> </RenderBusiness>
+                    <RenderBusiness bis={bis} key={bis.business_id} renderDetails={renderDetails}> </RenderBusiness>
 
                 )
             }

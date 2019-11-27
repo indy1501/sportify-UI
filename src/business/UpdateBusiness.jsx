@@ -110,7 +110,7 @@ class UpdateBusiness extends PureComponent {
                                     for (var i = 0; i < opts.length; i++) {
                                         var item = opts.item(i);
                                         console.log(item.selected, item.value);
-                                        if (item.selected == true) {
+                                        if (item.selected === true) {
                                             tempArray.push(item.value)
                                         }
                                     }

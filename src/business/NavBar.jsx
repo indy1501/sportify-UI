@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Navbar, Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Navbar} from 'react-bootstrap';
 import LogInPage from '../components/LogInPage';
 import LogOut from '../components/LogOut';
 
@@ -13,13 +13,13 @@ class NavBar extends PureComponent {
         }
     }
     componentDidMount() {
-        let userEmail = sessionStorage.getItem("userEmail")
+        let userName = sessionStorage.getItem("userName")
         let userObj = sessionStorage.getItem("userObj")
         console.log(userObj)
-        console.log(userEmail)
+        console.log(userName)
         this.setState({
             userObj: userObj,
-            user: userEmail
+            user: userName
         })
 
     }

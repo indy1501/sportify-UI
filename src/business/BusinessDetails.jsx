@@ -4,25 +4,28 @@ import { businessService } from '../services/businessService';
 import { IoMdPerson } from "react-icons/io";
 import { TiTick } from "react-icons/ti";
 import NavBar from './NavBar';
+import { Link } from 'react-router-dom';
 
 class BusinessDetails extends PureComponent {
     constructor(props) {
         super(props)
 
-        console.log("BiS ID ", props.match.params.id);
+        console.log("BiS ID ", props.business.business_id);
 
         this.state = {
-            businessData: {},
+            businessData: props.business,
             reviews: [],
             last_key_review_id: "",
             last_key_business_id: "",
-            businessId: props.match.params.id,
+            businessId: props.business.business_id,
+            userName:"",
+            userEmail:"",
             modalShow: false
         }
         this.loadMore = this.loadMore.bind(this)
         this.setModalShow  = this.setModalShow.bind(this)
         this.postReview = this.postReview.bind(this)
-        
+        this.getReviews = this.getReviews.bind(this)
     }
 
     setModalShow(value) {
@@ -31,12 +34,28 @@ class BusinessDetails extends PureComponent {
         })
     }
     postReview(review) { 
-        // ser
         console.log(review);
+        businessService.PostReview(this.state.businessId,review,this.state.userEmail,this.state.userName)
+            .then(json => {
+                console.log(json);
+                this.getReviews()
+            })
+            .catch(reason => {
+                console.log("Failed to fetch data from server, reason is : ", reason);
+            });
     }
 
     componentDidMount() {
-        businessService.getBusinessByID(this.state.businessId)
+        let userName =  sessionStorage.getItem("userName");
+        let userEmail = sessionStorage.getItem("userEmail");
+        console.log("userName", userName,userEmail)
+        this.setState({
+            userName:userName,
+            userEmail:userEmail
+        })
+
+        if (!this.state.businessData) {
+            businessService.getBusinessByID(this.state.businessId)
             .then(json => {
                 console.log(json);
                 if (Array.isArray(json)) {
@@ -48,32 +67,37 @@ class BusinessDetails extends PureComponent {
             .catch(reason => {
                 console.log("Failed to fetch data from server, reason is : ", reason);
             });
+        }
 
+        this.getReviews();
+    }
+
+    getReviews(){
         businessService.getReviews(this.state.businessId)
-            .then(json => {
-                console.log(json);
-                if (Array.isArray(json.reviews)) {
-                    this.setState({
-                        reviews: json.reviews,
-                        last_key_business_id: json.LastEvaluatedKey.business_id,
-                        last_key_review_id: json.LastEvaluatedKey.review_id
-                    });
-                }
-            })
-            .catch(reason => {
-                console.log("Failed to fetch data from server, reason is : ", reason);
-            });
+        .then(json => {
+            console.log(json);
+            if (Array.isArray(json.reviews)) {
+                this.setState({
+                    reviews: json.reviews,
+                    last_key_business_id: json.LastEvaluatedKey.business_id,
+                    last_key_review_id: json.LastEvaluatedKey.review_id
+                });
+            }
+        })
+        .catch(reason => {
+            console.log("Failed to fetch data from server, reason is : ", reason);
+        });
     }
 
     loadMore() {
         businessService.getMoreReviews(this.state.businessId, this.state.last_key_review_id, this.state.last_key_business_id)
             .then(json => {
                 console.log(json);
-                if (Array.isArray(json.businesses)) {
+                if (Array.isArray(json.reviews)) {
                     this.setState({
                         reviews: this.state.reviews.concat(json.reviews),
                         last_key_business_id: json.LastEvaluatedKey.business_id,
-                        last_key_city: json.LastEvaluatedKey.city
+                        last_key_review_id: json.LastEvaluatedKey.review_id
                     });
                 }
             })
@@ -91,10 +115,12 @@ class BusinessDetails extends PureComponent {
             keys = Object.keys(businessData.attributes)
         }
 
-
         return (
             <div>
-                <NavBar></NavBar>
+                <div style={{ margin: "30px" }}>
+                <Card.Link href="#" onClick={e=> this.props.closeBusiness()}>Go Back</Card.Link>
+                   {/*  <a onClick={e=> this.props.closeBusiness()}>Go Back</a>  */}
+                </div>
                 <Row>
                     <Col xl={{ span: 6, offset: 3 }}>
                         <Card style={{ margin: 30 }}>
@@ -132,7 +158,7 @@ class BusinessDetails extends PureComponent {
                                 {
                                     reviews && reviews.map(value => {
                                         return (
-                                            <Review bisReview={value}></Review>
+                                            <Review bisReview={value} key={value.business_id}></Review>
                                         )
                                     })
                                 }

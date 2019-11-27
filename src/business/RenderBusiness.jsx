@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 function RenderBusiness(props) {
 
     const businessURL = `/businessDetails/${props.bis.business_id}`
+    
     return (
 
                     <Card style={{ margin: 20 }}>
@@ -21,8 +22,9 @@ function RenderBusiness(props) {
                                     <Card.Title>{props.bis.name}</Card.Title>
                                     <Card.Subtitle className="mb-2 text-muted">{props.bis.city} {props.bis.state} {props.bis.postal_code}</Card.Subtitle>
                                     <Card.Text>Ratings: {props.bis.stars}</Card.Text>
-                                    <Card.Link></Card.Link>
-                                    <Link to={businessURL}>More Details</Link>
+                                    <Card.Link href="#" onClick={e=> props.renderDetails(props.bis)}>More Details</Card.Link>
+                                   {/*  <a onClick={e=> props.renderDetails(props.bis)}>More Details</a> */}
+                                 
                                 </Media.Body>
                             </Media>
                         </Card.Body>

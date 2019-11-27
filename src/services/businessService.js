@@ -135,11 +135,11 @@ function PostReview(businessId,review,userEmail,userName ) {
     const requestOption = {
         method: 'POST',
         body: JSON.stringify({
-            "cool": "",
-            "funny": "",
+            "cool": "0",
+            "funny": "0",
             "stars": "5",
             "text": review,
-            "useful": "",
+            "useful": "0",
             "user_id": userEmail,
             "username": userName
         }),

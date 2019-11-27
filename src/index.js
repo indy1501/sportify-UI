@@ -46,6 +46,7 @@ const routing = (
                 <Route path="/businessDetails/:id" component={BusinessDetails}/> 
                 <Route path="/businessAdmin" component={AdminPageBusiness}/> 
                 <Route path="/createBusiness" component={CreateBusiness}/>
+                <Route path="/Redirect" component={App}/>
                 <Route path="/updateBusiness/:id" component={UpdateBusiness}/>
                 <Route path="/loginokta" render={() => ( <Login baseUrl="https://dev-810207.okta.com" /> )}/>
                 <Route path="/implicit/callback" component={ImplicitCallback} />

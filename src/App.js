@@ -46,11 +46,11 @@ function App(props) {
 
   return (
     <Fragment>
-      {isValid && isAdmin &&
+      {isValid && !isAdmin &&
         <SearchBusiness />
       }
       {
-        isValid && !isAdmin &&
+        isValid && isAdmin &&
         <div>
 
           <AdminPageBusiness />

@@ -13,8 +13,10 @@ export const businessService = {
     PostReview
 }
 export const apiConfig = {
-    endpointURL: "http://localhost:3001",
-    endpointURL2: "http://localhost:3002"
+    /* endpointURL: "http://localhost:3001",
+    endpointURL2: "http://localhost:3002" */
+    endpointURL: "http://ec2-54-85-96-235.compute-1.amazonaws.com:8080",
+    endpointURL2: "http://ec2-3-92-239-7.compute-1.amazonaws.com:8080"
 }
 
 function getSearchData(business_type, city) {

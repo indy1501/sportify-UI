@@ -1,0 +1,16 @@
+#!/bin/sh
+    echo "Running deployment script"
+    ssh ubuntu@172.31.85.242 << EOF
+    pwd
+    whoami
+    echo "after git pull code 2"
+    cd ~/sportify-UI
+    echo "after git pull code 3"
+    sudo git pull origin master
+    echo "after git pull code 4"
+    sudo npm install
+    #sudo npm install -g nodemon pm2
+    sudo pm2 restart ecosystem.config.js
+    exit
+
+    EOF

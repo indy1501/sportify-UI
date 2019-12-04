@@ -161,39 +161,36 @@ const Carousal = (props) => {
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height={window.innerHeight - 450}
+                    height={window.innerHeight - 250}
                     src="https://iptvmasala.com/wp-content/uploads/2019/04/Sports-IPTV-m3u-playlist.jpg"
                     alt="First slide"
                 />
                 <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                    <h3>SpoRtify</h3>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height={window.innerHeight - 450}
+                    height={window.innerHeight - 250}
                     src="https://kubrick.htvapps.com/htv-prod-media.s3.amazonaws.com/images/gettyimages-649666110-1563321202.jpg?crop=1.00xw:0.892xh;0,0.0668xh&resize=900:*"
                     alt="Third slide"
                 />
 
                 <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                    <h3>SpoRtify</h3>
                 </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
                 <img
                     className="d-block w-100"
-                    height={window.innerHeight - 450}
-                    src="https://usercontent2.hubstatic.com/14476037_f520.jpg"
+                    height={window.innerHeight - 250}
+                    src="http://www.realdetroitweekly.com/wp-content/uploads/2016/12/Basketball.jpg"
                     alt="Third slide"
                 />
 
                 <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                    <h3>SpoRtify</h3>
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>

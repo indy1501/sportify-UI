@@ -116,15 +116,15 @@ class BusinessDetails extends PureComponent {
         }
 
         return (
-            <div>
+            <div style={{ overflowY: "hidden" }}>
                 <div style={{ margin: "30px" }}>
                 <Card.Link href="#" onClick={e=> this.props.closeBusiness()}>Go Back</Card.Link>
                    {/*  <a onClick={e=> this.props.closeBusiness()}>Go Back</a>  */}
                 </div>
-                <Row>
+                <Row style={{ overflowY: "hidden" }}>
                     <Col xl={{ span: 6, offset: 3 }}>
-                        <Card style={{ margin: 30 }}>
-                            <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+                        <Card style={{ margin: 10 }}>
+                            
                             <Card.Body>
                                 <h2>{businessData.name}</h2>
                                 <Card.Subtitle className="mb-2 text-muted">{businessData.address}, {businessData.city}, {businessData.state} {businessData.postal_code}</Card.Subtitle>

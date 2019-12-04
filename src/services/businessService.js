@@ -15,7 +15,7 @@ export const businessService = {
 export const apiConfig = {
    /*  endpointURL: "http://localhost:3001",
     endpointURL2: "http://localhost:3002" */
-    endpointURL: "http://ec2-3-84-11-206.compute-1.amazonaws.com:8080",
+    endpointURL: "https://sportifysvc.codeninjas.cf",
     endpointURL2: "http://ec2-54-91-205-76.compute-1.amazonaws.com.com:8080"
 }
 

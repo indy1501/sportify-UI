@@ -15,7 +15,7 @@ class NavBar extends PureComponent {
     }
 
     componentDidMount() {
-        setTimeout(this.loadUserObj, 1000)
+        this.loadUserObj()
     }
 
     loadUserObj() {
@@ -31,18 +31,18 @@ class NavBar extends PureComponent {
     }
 
     render() {
-        const { userObj } = this.state;
+        let userObj = sessionStorage.getItem("userObj");
+        console.log("User Object from Render: ", userObj);
         return (
             <Navbar bg="primary" variant="dark">
                 <Navbar.Brand>SpoRtify</Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
-                    {   this.state.user &&
+                    { userObj && userObj.email &&
                         <Navbar.Text>
-                            Signed in as: {userObj &&
-                                <a href="#login">{this.state.user}</a>}
+                            Signed in {userObj.email &&
+                                <a href="#login">as: {userObj.email}</a>}
                         </Navbar.Text>
                     }
-
                 </Navbar.Collapse>
                 {userObj && <LogOut></LogOut>}
                 {!userObj && <LogInPage></LogInPage>}

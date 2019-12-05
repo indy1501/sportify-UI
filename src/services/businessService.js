@@ -16,7 +16,7 @@ export const apiConfig = {
    /*  endpointURL: "http://localhost:3001",
     endpointURL2: "http://localhost:3002" */
     endpointURL: "https://sportifysvc.codeninjas.cf",
-    endpointURL2: "http://reviewsvc.codeninjas.cf"
+    endpointURL2: "https://reviewsvc.codeninjas.cf"
 }
 
 function getSearchData(business_type, city) {

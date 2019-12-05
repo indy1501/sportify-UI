@@ -1,6 +1,6 @@
 #!/bin/sh
     echo "Running deployment script"
-    ssh ubuntu@172.31.86.146 << EOF
+    ssh ubuntu@ << EOF
     pwd
     whoami
     echo "after git pull code 2"

@@ -12,7 +12,7 @@ function RenderBusiness(props) {
                         <Card.Body>
                             <Media>
                                 <img
-                                    width={70}
+                                    width={80}
                                     height={70}
                                     className="mr-3"
                                     src="https://www.hommenorthopedics.com/editor-uploads/website-755/multi-sports-blog-1530684776.jpg"

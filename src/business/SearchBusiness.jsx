@@ -15,8 +15,8 @@ class SearchBusiness extends PureComponent {
         super(props)
 
         this.state = {
-            activity: "Golf",
-            city: "Las Vegas",
+            activity: "",
+            city: "",
             last_key_business_id: "",
             last_key_city: "",
             searchData: [],
@@ -51,6 +51,12 @@ class SearchBusiness extends PureComponent {
                 if (Array.isArray(json.businesses)) {
                     this.setState({
                         searchData: json.businesses,
+                        /* last_key_business_id: json.LastEvaluatedKey.business_id,
+                        last_key_city: json.LastEvaluatedKey.city */
+                    });
+                }
+                if (json.LastEvaluatedKey){
+                    this.setState({
                         last_key_business_id: json.LastEvaluatedKey.business_id,
                         last_key_city: json.LastEvaluatedKey.city
                     });

@@ -28,6 +28,7 @@ class AdminPageBusiness extends PureComponent {
         this.setState({
             user: userEmail
         })
+
         this.getUserBusiness(userEmail)
 
     }
@@ -85,7 +86,7 @@ class AdminPageBusiness extends PureComponent {
                         }
                         {
                             hasBusiness && <Card >
-                                <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />
+                                {/* <Card.Img variant="top" src="holder.js/100px180?text=Image cap" /> */}
                                 <Card.Body>
                                     <h2>{userBusinessData.name}</h2>
                                     <Card.Subtitle className="mb-2 text-muted">{userBusinessData.address} {userBusinessData.city} {userBusinessData.state} {userBusinessData.postal_code}</Card.Subtitle>
@@ -96,7 +97,7 @@ class AdminPageBusiness extends PureComponent {
                                     <Card.Text>{userBusinessData.categories}</Card.Text>
                                      {
 
-                                        /* userBusinessData.categories && userBusinessData.categories.map(value => {
+                                       /*  userBusinessData.categories && userBusinessData.categories.map(value => {
                                             return (<Card.Text key={value}>&nbsp; {value} &nbsp;  <TiTick style={{ fontStyle: "Bold", color: "green" }} /> </Card.Text>)
                                         }) */
                                     }

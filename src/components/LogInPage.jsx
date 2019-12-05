@@ -20,8 +20,8 @@ function LogInPage() {
                         <Card.Body>
                             <Card.Text></Card.Text>
                             {/* <Button variant="primary" href="https://projectapp.auth.us-west-2.amazoncognito.com/login?response_type=token&client_id=6du6tkbf7lvqhdl5evnn6vc7sm&redirect_uri=http://localhost:3000"> */}
-                           <Button variant="primary" href="https://storageapp.auth.us-east-2.amazoncognito.com/login?response_type=token&client_id=7rt07fe4ovcpqb6tdbrrajechq&redirect_uri=https://sportifyui.codeninjas.cf/Redirect">
-                            {/* <Button variant="primary" href="https://storageapp.auth.us-east-2.amazoncognito.com/login?response_type=token&client_id=7rt07fe4ovcpqb6tdbrrajechq&redirect_uri=http://localhost:3000/Redirect"> */}
+                            <Button variant="primary" href="https://storageapp.auth.us-east-2.amazoncognito.com/login?response_type=token&client_id=7rt07fe4ovcpqb6tdbrrajechq&redirect_uri=https://sportifyui.codeninjas.cf/Redirect"> 
+                            {/* <Button variant="primary" href="https://storageapp.auth.us-east-2.amazoncognito.com/login?response_type=token&client_id=7rt07fe4ovcpqb6tdbrrajechq&redirect_uri=http://localhost:3000/Redirect">  */}
                                 LogIn / SignUp 
                             </Button>
                         </Card.Body>

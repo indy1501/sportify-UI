@@ -139,7 +139,7 @@ class CreateBusiness extends PureComponent {
                                     Please provide a valid postal code.
                             </Form.Control.Feedback>
                             </Form.Group>
-                            <Button variant="primary" type="submit" onClick={this.onSubmit}>
+                            <Button variant="primary" type="button" onClick={this.onSubmit}>
                                 Submit
                         </Button>
                         </Form>

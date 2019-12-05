@@ -79,6 +79,12 @@ class BusinessDetails extends PureComponent {
             if (Array.isArray(json.reviews)) {
                 this.setState({
                     reviews: json.reviews,
+                    /* last_key_business_id: json.LastEvaluatedKey.business_id,
+                    last_key_review_id: json.LastEvaluatedKey.review_id */
+                });
+            }
+            if (json.LastEvaluatedKey){
+                this.setState({
                     last_key_business_id: json.LastEvaluatedKey.business_id,
                     last_key_review_id: json.LastEvaluatedKey.review_id
                 });
@@ -96,6 +102,12 @@ class BusinessDetails extends PureComponent {
                 if (Array.isArray(json.reviews)) {
                     this.setState({
                         reviews: this.state.reviews.concat(json.reviews),
+                        /* last_key_business_id: json.LastEvaluatedKey.business_id,
+                        last_key_review_id: json.LastEvaluatedKey.review_id */
+                    });
+                }
+                if (json.LastEvaluatedKey){
+                    this.setState({
                         last_key_business_id: json.LastEvaluatedKey.business_id,
                         last_key_review_id: json.LastEvaluatedKey.review_id
                     });
@@ -116,12 +128,12 @@ class BusinessDetails extends PureComponent {
         }
 
         return (
-            <div style={{ overflowY: "hidden" }}>
+            <div>
                 <div style={{ margin: "30px" }}>
                 <Card.Link href="#" onClick={e=> this.props.closeBusiness()}>Go Back</Card.Link>
                    {/*  <a onClick={e=> this.props.closeBusiness()}>Go Back</a>  */}
                 </div>
-                <Row style={{ overflowY: "hidden" }}>
+                <Row>
                     <Col xl={{ span: 6, offset: 3 }}>
                         <Card style={{ margin: 10 }}>
                             
@@ -184,7 +196,7 @@ export default BusinessDetails;
 export const Review = ({bisReview}) => {
     const review = bisReview;
     return (
-        <Card border="primary" key={review.business_id}>
+        <Card border="primary" key={review.business_id} style={{ marginTop: "10px" }} >
         <Card.Header><IoMdPerson/> &nbsp; {review.username}</Card.Header>
         <Card.Body>
             <Card.Text>

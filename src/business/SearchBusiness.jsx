@@ -74,6 +74,12 @@ class SearchBusiness extends PureComponent {
                 if (Array.isArray(json.businesses)) {
                     this.setState({
                         searchData: this.state.searchData.concat(json.businesses),
+                       /*  last_key_business_id: json.LastEvaluatedKey.business_id,
+                        last_key_city: json.LastEvaluatedKey.city */
+                    });
+                }
+                if (json.LastEvaluatedKey){
+                    this.setState({
                         last_key_business_id: json.LastEvaluatedKey.business_id,
                         last_key_city: json.LastEvaluatedKey.city
                     });

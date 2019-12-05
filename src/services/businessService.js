@@ -128,7 +128,7 @@ function getMoreReviews(businessId, last_key_review_id, last_key_business_id) {
         method: 'GET',
         headers: { "Content-Type": "application/json" }
     }
-    return fetch(`${apiConfig.endpointURL2}/businesses/${businessId}/reviews?last_key_business_id=${last_key_business_id}&last_key_business_id=${last_key_business_id}&last_key_review_id=${last_key_review_id}`, requestOption).then(res => {
+    return fetch(`${apiConfig.endpointURL2}/businesses/${businessId}/reviews?last_key_business_id=${last_key_business_id}&last_key_review_id=${last_key_review_id}`, requestOption).then(res => {
         //console.log(res); 
         return res.json();
     })

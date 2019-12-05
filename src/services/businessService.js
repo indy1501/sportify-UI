@@ -114,7 +114,8 @@ function getBusinessByID(businessId) {
 function getReviews(businessId) {
     const requestOption = {
         method: 'GET',
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json",
+                     "Access-Control-Allow-Origin": "*"}
     }
     return fetch(`${apiConfig.endpointURL2}/businesses/${businessId}/reviews`, requestOption).then(res => {
         // console.log(res); 
@@ -126,7 +127,8 @@ function getMoreReviews(businessId, last_key_review_id, last_key_business_id) {
     //console.log("business_type = "+business_type, "city = "+city);
     const requestOption = {
         method: 'GET',
-        headers: { "Content-Type": "application/json" }
+        headers: { "Content-Type": "application/json",
+                     "Access-Control-Allow-Origin": "*"}
     }
     return fetch(`${apiConfig.endpointURL2}/businesses/${businessId}/reviews?last_key_business_id=${last_key_business_id}&last_key_review_id=${last_key_review_id}`, requestOption).then(res => {
         //console.log(res); 

@@ -11,8 +11,14 @@ class NavBar extends PureComponent {
             userObj: undefined,
             user: ""
         }
+        this.loadUserObj = this.loadUserObj.bind(this)
     }
+
     componentDidMount() {
+        setTimeout(this.loadUserObj, 1000)
+    }
+
+    loadUserObj() {
         let userName = sessionStorage.getItem("userName")
         let userEmail = sessionStorage.getItem("userEmail")
         let userObj = sessionStorage.getItem("userObj")
@@ -22,7 +28,6 @@ class NavBar extends PureComponent {
             userObj: userObj,
             user: userEmail
         })
-
     }
 
     render() {

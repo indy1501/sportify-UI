@@ -84,7 +84,7 @@ class UpdateBusiness extends PureComponent {
 
     render() {
         return (
-            
+
             <div>
                 <NavBar></NavBar>
                 <div style={{ margin: "30px" }}>
@@ -160,9 +160,12 @@ class UpdateBusiness extends PureComponent {
                                     Please provide a valid postal code.
                             </Form.Control.Feedback>
                             </Form.Group>
-                            <Button variant="primary" type="submit" onClick={this.onSubmit}>
-                                Submit
-                        </Button>
+                            <Link to="/businessAdmin">
+                                <Button variant="primary" type="button" onClick={this.onSubmit}>
+                                    Submit
+                                </Button>
+                            </Link>
+
                         </Form>
                     </Card.Body>
                 </Card>

@@ -94,12 +94,12 @@ class AdminPageBusiness extends PureComponent {
 
                                 <Card.Body>
                                     <Card.Title>Categories : </Card.Title>
-                                    <Card.Text>{userBusinessData.categories}</Card.Text>
+                                   {/*  <Card.Text>{userBusinessData.categories}</Card.Text> */}
                                      {
 
-                                       /*  userBusinessData.categories && userBusinessData.categories.map(value => {
+                                        userBusinessData.categories && userBusinessData.categories.map(value => {
                                             return (<Card.Text key={value}>&nbsp; {value} &nbsp;  <TiTick style={{ fontStyle: "Bold", color: "green" }} /> </Card.Text>)
-                                        }) */
+                                        })
                                     }
                                 </Card.Body>
                                 <Card.Body>

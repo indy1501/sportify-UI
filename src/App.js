@@ -37,7 +37,7 @@ function App(props) {
     var userObj = decoded.payload;
     sessionStorage.setItem("userEmail", userObj.email);
     sessionStorage.setItem("userName", userObj["cognito:username"]);
-    sessionStorage.setItem("userObj", userObj);
+    sessionStorage.setItem("userObj", JSON.stringify(userObj));
     console.log("userObj", userObj);
     var isAdmin = userObj && userObj["cognito:groups"] && userObj["cognito:groups"].filter(g => g == "AdminGroup").length > 0;
   }

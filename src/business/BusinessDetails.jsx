@@ -145,7 +145,7 @@ class BusinessDetails extends PureComponent {
                             <Card.Body>
                                 <Card.Title>Ratings : <a style={{ fontStyle: "Bold", color: "red" }}>{businessData.stars}</a></Card.Title>
                                 <Card.Title>Categories :</Card.Title>
-                                <Card.Text style={{ border: "1px solid green", padding: 5 }}>{businessData.categories}</Card.Text>
+                                <Card.Text style={{ border: "1px solid green", padding: 5 }}>{businessData.categories} </Card.Text>
                             </Card.Body>
 
                             <Card.Body>

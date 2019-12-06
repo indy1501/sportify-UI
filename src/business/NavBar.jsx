@@ -8,7 +8,7 @@ class NavBar extends PureComponent {
         super(props)
 
         this.state = {
-            userObj: undefined,
+            userObj: {},
             user: ""
         }
         this.loadUserObj = this.loadUserObj.bind(this)
@@ -21,7 +21,8 @@ class NavBar extends PureComponent {
     loadUserObj() {
         let userName = sessionStorage.getItem("userName")
         let userEmail = sessionStorage.getItem("userEmail")
-        let userObj = sessionStorage.getItem("userObj")
+        let userObjStr = sessionStorage.getItem("userObj")
+        const userObj = JSON.parse(userObjStr);
         console.log(userObj)
         console.log(userName)
         this.setState({
@@ -31,16 +32,21 @@ class NavBar extends PureComponent {
     }
 
     render() {
-        let userObj = sessionStorage.getItem("userObj");
+        let userObj = this.state.userObj;
         console.log("User Object from Render: ", userObj);
         return (
             <Navbar bg="primary" variant="dark">
                 <Navbar.Brand>SpoRtify</Navbar.Brand>
                 <Navbar.Collapse className="justify-content-end">
-                    { userObj && userObj.email &&
+                    { userObj  &&
                         <Navbar.Text>
-                            Signed in {userObj.email &&
-                                <a href="#login">as: {userObj.email}</a>}
+                            Signed in {
+                                userObj.email && <Navbar.Text style={{padding:0}}>
+                                as : &nbsp;<a href="#login"> {this.state.user}</a>
+                                </Navbar.Text>
+                                }
+                            
+                               
                         </Navbar.Text>
                     }
                 </Navbar.Collapse>
